@@ -20,6 +20,7 @@ var timeOut = function () {
 var interval = function(){
   var intervalOutput = setInterval(function(){
     console.log("From setInterval");
+    console.log("Format string using util : %s  %d", 'Hello, ', 2016);
   },1000);
   intervalOutput.unref();
 };
