@@ -2,6 +2,7 @@
 // прикладного приложения, загружаемого в песочницу демонстрационным
 // кусочком фреймворка. Читайте README.md в нем задания.
 
+require("util");
 // Вывод из глобального контекста модуля
 console.log('From application global context');
 
@@ -10,25 +11,4 @@ module.exports = function() {
   console.log('From application exported function');
 };
 
-
-var timeOut = function () {
-  setTimeout(function () {
-    console.log("From setTimeout");
-  },3000);
-};
-
-var interval = function(){
-  var intervalOutput = setInterval(function(){
-    console.log("From setInterval");
-    console.log(util.format("Format string using util : %s  %d", 'Hello, ', 2016));
-  },1000);
-  intervalOutput.unref();
-};
-
-interval();
-timeOut();
-
-
-
-
-
+console.log("From wrapped console.log()");
