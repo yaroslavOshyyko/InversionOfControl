@@ -1,0 +1,1 @@
+application 16:3:2016  0:14:25: From wrapped console.log()ntext
