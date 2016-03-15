@@ -2,8 +2,10 @@
 // прикладного приложения, загружаемого в песочницу демонстрационным
 // кусочком фреймворка. Читайте README.md в нем задания.
 
-// Вывод из глобального контекста модуля
+require("util");
+var fs = require('fs');
 
+// Вывод из глобального контекста модуля
 console.log('From application global context');
 
 module.exports = function() {
@@ -11,4 +13,11 @@ module.exports = function() {
   console.log('From application exported function');
 };
 
-console.log("From wrapped console.log()");
+module.exports.f = function(){
+  console.log("From wrapped console.log()");
+}
+
+module.exports.int = 10;
+
+
+//console.dir(global);

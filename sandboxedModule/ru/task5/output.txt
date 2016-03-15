@@ -1,1 +1,14 @@
-application 3:3:2016  14:31:10: From wrapped console.log()ntext
+application 3:3:2016  14:31:10: From wrapped console.log()ntextapplication 3:3:2016  15:27:25: From application global contextapplication 3:3:2016  15:27:25: From wrapped console.log()application 3:3:2016  15:27:42: From application global context
+application 3:3:2016  15:27:42: From wrapped console.log()
+application 3:3:2016  15:31:26: From application global context
+application 3:3:2016  15:31:26: From wrapped console.log()
+application 3:3:2016  15:37:15: From application global context
+application 3:3:2016  15:37:15: From wrapped console.log()
+application 3:3:2016  15:42:39: From application global context
+application 3:3:2016  15:42:39: From wrapped console.log()
+application 3:3:2016  15:43:17: From application global context
+application 3:3:2016  15:43:17: From wrapped console.log()
+application 3:3:2016  15:43:47: From application global context
+application 3:3:2016  15:43:47: From wrapped console.log()
+application 3:3:2016  15:44:6: From application global context
+application 3:3:2016  15:44:6: From wrapped console.log()

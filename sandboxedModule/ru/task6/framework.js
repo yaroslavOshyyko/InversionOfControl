@@ -35,7 +35,7 @@ var context = {
         var res = require(file);
         var date = new Date();
         var time = date.getDate() + ':' + (date.getMonth()+1) + ':' + date.getFullYear() + '  ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-        fs.writeFile("requireLog.txt", time + ' ' + file, function(err, info){
+        fs.appendFile("requireLog.txt", time + ' ' + file, function(err, info){
             if (err) throw err;
         });
         return res;

@@ -6,12 +6,13 @@
 // Фреймворк может явно зависеть от библиотек через dependency lookup
 var fs = require('fs'),
     vm = require('vm'),
-    path  = require('path');
+    path  = require('path'),
+    app = require("./application.js");
+
 
 // Создаем контекст-песочницу, которая станет глобальным контекстом приложения
 var context = {
     module: {},
-    console: console,
     console: {
         log: function(message){
             var date = new Date();
@@ -24,11 +25,15 @@ var context = {
             var time = date.getDate() + ':' + (date.getMonth()+1) + ':' + date.getFullYear() + '  ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
             console.log(applicationName + ' ' + time + ': ' + message);
 
-            var consoleOutput = fs.appendFile("output.txt", applicationName + ' ' + time + ': ' + message + '\n', function(err, info){
+            fs.writeFile("output.txt", applicationName + ' ' + time + ': ' + message, function(err, info){
                 if (err) throw err;
             });
-        }
+        },
+        dir: console.dir
+
     },
+
+
     require: function(file){
         var res = require(file);
         var date = new Date();
@@ -38,6 +43,8 @@ var context = {
         });
         return res;
     }
+
+
 };
 context.global = context;
 var sandbox = vm.createContext(context);
@@ -61,4 +68,9 @@ fs.readFile(fileName, function(err, src) {
   
   // Забираем ссылку из sandbox.module.exports, можем ее исполнить,
   // сохранить в кеш, вывести на экран исходный код приложения и т.д.
+    for(var f in sandbox.module.exports){
+        console.log(typeof sandbox.module.exports[f]);
+    }
+    console.log();
 });
+
