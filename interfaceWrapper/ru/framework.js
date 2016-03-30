@@ -26,10 +26,25 @@ var fs = require('fs'),
   }
 };*/
 
+
+//Логируем вызовы функций, колбеков и сумарной считаной памяти (вывод каждые 10 сек)
+var functionCalls = 0;
+var functionCallbacks = 0;
+var totalReadMemory = 0;
+setInterval(logOutput, 10000);
+
+
+function logOutput(){
+  console.log("Calls to functions: " + functionCalls);
+  console.log("Calls to Callbacks: " + functionCallbacks);
+  console.log("Total read memory: " + totalReadMemory);
+}
+
+
 var context = {
   module: {},
   console: console,
-
+  setInterval: setInterval,
   fs: cloneInterface(fs)
 }
 
@@ -47,12 +62,15 @@ function wrapFunction(fnName, fn) {
     Array.prototype.push.apply(args, arguments);
     if(typeof(args[args.length-1]) == typeof(Function)){
       args[args.length - 1] = wrapFunction(args[args.length - 1].name, args[args.length - 1]);
+      functionCallbacks++;
+
     }
     console.log('Call: ' + fnName);
     if(args[1] instanceof Buffer){
-      args[1] = args[1].length;
+      totalReadMemory += args[1].length;
     }
-    console.dir(args);
+    console.dir(args[1].length);
+    functionCalls++;
     return fn.apply(undefined, args);
   }
 }
@@ -68,3 +86,5 @@ fs.readFile(fileName, function(err, src) {
   var script = vm.createScript(src, fileName);
   script.runInNewContext(sandbox);
 });
+
+

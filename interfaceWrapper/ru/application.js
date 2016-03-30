@@ -6,11 +6,32 @@ function timerEvent() {
   console.log('From application timer event');
 }
 
-// Устанавливаем функцию на таймер
-//setTimeout(timerEvent, 1000);
+
+
 
 var fileName = './README.md';
-console.log('Application going to read ' + fileName);
-fs.readFile(fileName, function(err, src) {
-  console.log('File ' + fileName + ' size ' + src.length);
-});
+
+var read = function() {
+  console.log('Application going to read ' + fileName);
+  fs.readFile(fileName, function (err, src) {
+    console.log('File ' + fileName + ' size ' + src.length);
+  });
+}
+
+var open = function(){
+  console.log("Opening file " + fileName);
+  fs.open(fileName,'r',  function(err, src){
+      console.log("File opened");
+  })
+}
+
+var dir  = function(){
+  fs.readdir('./', function(err, dir){
+    console.log(dir);
+  })
+}
+
+// Устанавливаем функции работы с файлами на таймер
+setInterval(read, 3000);
+setInterval(open, 5000);
+setInterval(dir, 7000);
